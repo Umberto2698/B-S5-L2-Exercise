@@ -3,6 +3,7 @@ package lezione17.enteties;
 import lezione17.enums.OrderState;
 import lombok.Getter;
 import lombok.ToString;
+import org.springframework.beans.factory.annotation.Qualifier;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.stereotype.Component;
@@ -26,7 +27,7 @@ public class Ordine {
     private int hour;
     private int minute;
 
-    public Ordine(Tavolo tavolo, List<Pizza> pizze, List<Beverage> bevande, @Value("&{seat.price}") int seatPrice) {
+    public Ordine(Tavolo tavolo, @Qualifier("getPizze") List<Pizza> pizze, @Qualifier("getBevande") List<Beverage> bevande, @Value("${seat.price}") double seatPrice) {
         this.tavolo = tavolo;
         this.pizze = pizze;
         this.clientsNumber = 3;
